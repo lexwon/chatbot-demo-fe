@@ -4,12 +4,21 @@ export function useFetch() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchData = useCallback(async (request, options = {}) => {
+  const postData = useCallback(async ({url, body, options = {}}) => {
     setLoading(true);
     setError(null);
 
     try {
-      const response = await fetch(request, options);
+      const response = await fetch(
+        new Request(url, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body,
+          method: "POST",
+        }),
+        options
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -17,7 +26,6 @@ export function useFetch() {
 
       const result = await response.json();
       return result;
-      //   setData(result);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -25,5 +33,5 @@ export function useFetch() {
     }
   }, []);
 
-  return { loading, error, fetchData };
+  return { loading, error, postData };
 }

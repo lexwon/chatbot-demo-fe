@@ -1,3 +1,3 @@
 export function Flex(props) {
-  return <div style={{ display: "flex", ...props }}>{props.children}</div>;
+  return <div className={`flex ${props.className}`}>{props.children}</div>;
 }
