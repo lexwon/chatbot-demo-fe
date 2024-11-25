@@ -37,36 +37,38 @@ function Chatbot() {
         url: "http://localhost:8000/api/chat",
         body: JSON.stringify({ message: prompt }),
       }).then((data) => {
-        setPrompt("");
-        setMessages([
-          ...messages,
-          { text: prompt, type: MessageTypes.prompt },
-          { text: data.response, type: MessageTypes.response },
-        ]);
+        if (data) {
+          setPrompt("");
+          setMessages([
+            ...messages,
+            { text: prompt, type: MessageTypes.prompt },
+            { text: data.response, type: MessageTypes.response },
+          ]);
+        }
       });
     }
   };
 
   if (loading) {
-    return <h1>Loading ....</h1>;
+    return <h3>Loading ....</h3>;
   }
 
   if (error) {
-    return <h1>There was an error communicating to the Chatbot</h1>;
+    return <h3>There was an error communicating to the Chatbot</h3>;
   }
 
   return (
     <Flex className="basis-1/3 flex-col">
       <div className="bg-slate-100 border-solid border-black rounded">
-        {messages.map((message) => (
-          <>
+        {messages.map((message, index) => (
+          <div key={index}>
             {message.type === MessageTypes.prompt && (
               <Prompt text={message.text} />
             )}
             {message.type === MessageTypes.response && (
               <Response text={message.text} />
             )}
-          </>
+          </div>
         ))}
       </div>
       <Flex className="py-3 flex-row justify-center">
@@ -99,7 +101,9 @@ function Chatbot() {
 function Prompt({ text }) {
   return (
     <Flex className="justify-end pr-3 py-3">
-      <span className="bg-green-500 rounded-l rounded-tr px-3 py-1">{text}</span>
+      <span className="bg-green-500 rounded-l rounded-tr px-3 py-1">
+        {text}
+      </span>
     </Flex>
   );
 }
