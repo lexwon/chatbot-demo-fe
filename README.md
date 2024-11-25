@@ -1,6 +1,6 @@
 # Demo Chatbot
 
-This is a demo chatbot built using [Create React App](https://github.com/facebook/create-react-app) and [tailwindcss][https://tailwindcss.com/].
+This is a demo chatbot built using [Create React App](https://github.com/facebook/create-react-app) and [tailwindcss](https://tailwindcss.com/).
 <video src="https://github.com/user-attachments/assets/e95e1caa-5b17-4c83-a239-b00fde5f5184" />
 
 This application works in conjunction with the [backend](https://github.com/lexwon/chatbot-demo-be)
